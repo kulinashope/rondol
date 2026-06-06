@@ -1,0 +1,19 @@
+# Segredos
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+
+# Saidas geradas
+bilhetes_*.txt
+bilhetes_*.json
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

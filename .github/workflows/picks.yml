@@ -1,0 +1,42 @@
+name: Picks do dia no Discord
+
+# Roda automaticamente todo dia + permite rodar na mao (workflow_dispatch).
+# GRATIS no GitHub Actions (repositorio publico ou ate 2000 min/mes no privado).
+on:
+  schedule:
+    # 12:00 UTC = 09:00 no horario de Brasilia (UTC-3). Ajuste se quiser.
+    - cron: "0 12 * * *"
+  workflow_dispatch:
+    inputs:
+      liga:
+        description: "league_id especifico (deixe vazio = TODAS as ligas do dia)"
+        required: false
+        default: ""
+
+jobs:
+  enviar-picks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Enviar picks ao Discord
+        env:
+          APIFOOTBALL_KEY: ${{ secrets.APIFOOTBALL_KEY }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          APIFOOTBALL_TIMEZONE: America/Sao_Paulo
+        run: |
+          LIGA="${{ github.event.inputs.liga }}"
+          if [ -n "$LIGA" ]; then
+            python enviar_discord.py --liga "$LIGA" --treino-dias 120 --min-edge 0.05 --so-alta --top 8
+          else
+            python enviar_discord.py --treino-dias 90 --min-edge 0.05 --so-alta --top 8
+          fi
