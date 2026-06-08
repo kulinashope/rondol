@@ -69,17 +69,17 @@ def registrar_picks(data: str, picks: list[dict]) -> int:
     return novos
 
 
-def atualizar_resultados(client) -> int:
-    """Resolve os picks pendentes cujos jogos ja terminaram. Retorna qtd resolvida."""
+def atualizar_resultados(client) -> list[dict]:
+    """Resolve os picks pendentes cujos jogos ja terminaram. Retorna os resolvidos agora."""
     hist = _carregar(HISTORICO, [])
     pendentes_por_data = defaultdict(list)
     for r in hist:
         if r["status"] == "pendente":
             pendentes_por_data[r["data"]].append(r)
     if not pendentes_por_data:
-        return 0
+        return []
 
-    resolvidos = 0
+    resolvidos = []
     for data, regs in pendentes_por_data.items():
         try:
             eventos = client.get_events(data, data)
@@ -103,9 +103,23 @@ def atualizar_resultados(client) -> int:
             r["status"] = "green" if ok else "red"
             r["placar"] = f"{gh}-{ga}"
             r["lucro_unit"] = (r["odd"] - 1.0) if ok else -1.0
-            resolvidos += 1
+            resolvidos.append(r)
     _salvar(HISTORICO, hist)
     return resolvidos
+
+
+def resumo_jogos_texto(resolvidos: list[dict]) -> str:
+    """Mensagem com o resultado (GREEN/RED) de cada pick resolvido agora."""
+    if not resolvidos:
+        return ""
+    linhas = ["✅❌ **Resultados dos picks** (conferidos agora):", ""]
+    for r in resolvidos:
+        emoji = "✅ GREEN" if r["status"] == "green" else "❌ RED"
+        linhas.append(f"{emoji} — {r['aposta']} | {r['jogo']} {r.get('placar','')} (odd {r['odd']})")
+    greens = sum(1 for r in resolvidos if r["status"] == "green")
+    linhas.append("")
+    linhas.append(f"Parcial de hoje: {greens}/{len(resolvidos)} green.")
+    return "\n".join(linhas)
 
 
 def aprender() -> dict:

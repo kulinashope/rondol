@@ -1,0 +1,28 @@
+[
+  {
+    "data": "2026-06-08",
+    "match_id": "733245",
+    "jogo": "Union de Santa Fe 2 x Atl. Tucuman 2",
+    "liga": "Torneo Proyección",
+    "codigo": "OVER25",
+    "aposta": "Over 2.5",
+    "odd": 1.9,
+    "nota": "Alta",
+    "prob": 56.7,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-08",
+    "match_id": "733240",
+    "jogo": "Racing Club 2 x Banfield 2",
+    "liga": "Torneo Proyección",
+    "codigo": "BTS_NO",
+    "aposta": "Ambas marcam: Nao",
+    "odd": 1.86,
+    "nota": "Alta",
+    "prob": 55.5,
+    "status": "pendente",
+    "lucro_unit": null
+  }
+]

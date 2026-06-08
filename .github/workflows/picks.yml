@@ -31,11 +31,12 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
-      - name: Conferir resultados anteriores e APRENDER
+      - name: Conferir resultados anteriores, APRENDER e postar resultados no Discord
         env:
           APIFOOTBALL_KEY: ${{ secrets.APIFOOTBALL_KEY }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
           APIFOOTBALL_TIMEZONE: America/Sao_Paulo
-        run: python acompanhar.py || echo "sem historico ainda"
+        run: python acompanhar.py --discord || echo "sem historico ainda"
 
       - name: Gerar e enviar picks do dia (ja com o aprendizado)
         env:

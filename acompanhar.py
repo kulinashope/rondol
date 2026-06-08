@@ -16,7 +16,7 @@ from rich.console import Console
 
 from api_client import ApiFootballClient
 from config import Settings
-from aprendizado import atualizar_resultados, aprender, resumo_texto
+from aprendizado import atualizar_resultados, aprender, resumo_texto, resumo_jogos_texto
 
 console = Console()
 
@@ -35,8 +35,12 @@ def main() -> None:
     resolvidos = atualizar_resultados(client)
     ajustes = aprender()
     texto = resumo_texto()
+    jogos = resumo_jogos_texto(resolvidos)
 
-    console.print(f"[dim]Picks resolvidos nesta rodada: {resolvidos}[/dim]\n")
+    console.print(f"[dim]Picks resolvidos nesta rodada: {len(resolvidos)}[/dim]\n")
+    if jogos:
+        console.print(jogos.replace("**", ""))
+        console.print("")
     console.print(texto.replace("**", ""))
 
     evit = [k for k, v in ajustes.get("mercado", {}).items() if v.get("evitar")]
@@ -48,8 +52,13 @@ def main() -> None:
         if not webhook:
             console.print("[red]Sem DISCORD_WEBHOOK_URL para postar.[/red]")
             return
-        for pedaco in [texto[i:i + 1900] for i in range(0, len(texto), 1900)]:
-            requests.post(webhook, json={"content": pedaco, "username": "Acompanhamento"}, timeout=30).raise_for_status()
+        partes = [p for p in (jogos, texto) if p]
+        conteudo = "\n\n".join(partes)
+        if not conteudo.strip():
+            console.print("[dim]Nada novo para postar.[/dim]")
+            return
+        for pedaco in [conteudo[i:i + 1900] for i in range(0, len(conteudo), 1900)]:
+            requests.post(webhook, json={"content": pedaco, "username": "Resultados"}, timeout=30).raise_for_status()
         console.print("[green]Resumo postado no Discord.[/green]")
 
 

@@ -1,0 +1,37 @@
+name: Resultados no Discord (noite)
+
+# Confere os jogos do dia e posta os resultados (green/red) no Discord.
+on:
+  schedule:
+    - cron: "30 23 * * *"   # 23:30 UTC ~ 20:30 BRT (maioria dos jogos do dia ja terminou)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  resultados:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Conferir e postar resultados
+        env:
+          APIFOOTBALL_KEY: ${{ secrets.APIFOOTBALL_KEY }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          APIFOOTBALL_TIMEZONE: America/Sao_Paulo
+        run: python acompanhar.py --discord || echo "sem historico"
+      - name: Salvar historico de aprendizado
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add historico_picks.json ajustes_mercado.json 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Atualiza resultados [skip ci]"
+            git push
+          else
+            echo "Nada novo."
+          fi
