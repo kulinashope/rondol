@@ -1,0 +1,36 @@
+{
+  "mercado": {
+    "BTS_YES": {
+      "n": 1,
+      "acerto_pct": 0.0,
+      "roi_pct": -100.0,
+      "evitar": false
+    },
+    "OVER25": {
+      "n": 1,
+      "acerto_pct": 100.0,
+      "roi_pct": 57.0,
+      "evitar": false
+    }
+  },
+  "liga_mercado": {
+    "Division 2 - Norrland|BTS_YES": {
+      "n": 1,
+      "acerto_pct": 0.0,
+      "roi_pct": -100.0,
+      "evitar": false
+    },
+    "Ettan - Norra|OVER25": {
+      "n": 1,
+      "acerto_pct": 100.0,
+      "roi_pct": 57.0,
+      "evitar": false
+    }
+  },
+  "total": {
+    "n": 2,
+    "acerto_pct": 50.0,
+    "roi_pct": -21.5,
+    "evitar": false
+  }
+}
