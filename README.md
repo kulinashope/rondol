@@ -269,18 +269,20 @@ modelo a partir do historico de resultados (`get_events`). Ele usa as tecnicas
 que os modeladores profissionais usam:
 
 - Forca de ataque/defesa por time + vantagem de jogar em casa.
+- Finalizacoes no gol ('On Target'): o rating mistura 60% gols + 40% chutes no
+  gol (mais estaveis e preditivos — achado academico para Over/Under). Vem
+  embutido no get_events, sem custo extra.
 - Peso por recencia (forma): jogos recentes pesam mais (meia-vida ~40 dias).
-- Correcao de Dixon-Coles: ajusta placares baixos (0-0,1-0,1-1) que o Poisson
-  puro erra por assumir independencia.
-- Ensemble com taxa empirica: mistura o Poisson com a frequencia real de Over/
-  BTTS de cada time (corrige vies residual).
+- Correcao de Dixon-Coles: ajusta placares baixos (0-0,1-0,1-1).
+- Ensemble com taxa empirica de Over/BTTS de cada time.
+- H2H opcional (`--h2h`, so com --liga): ajusta Over/BTTS pelos confrontos
+  diretos recentes (peso 15%, exige >=3 jogos — H2H e fraco/pequena amostra).
 - Ajuste por desfalques (opcional, `--desfalques`).
 
-Resultado medido (Argentina Primera Nacional, 215 jogos de teste): apos essas
-melhorias, TODOS os mercados ficaram calibrados dentro de +-2.5pp (o vies de
-BTTS caiu de -8.6pp para -2.4pp). Ou seja: quando o modelo diz 65%, acontece
-~65%. Calibracao boa nao garante lucro — mas torna o 'value' confiavel e evita
-apostar em ilusao.
+Resultado medido (Argentina Primera Nacional, 231 jogos de teste): apos incluir
+as finalizacoes, TODOS os mercados ficaram calibrados dentro de +-1.5pp (antes
+era +-2.5pp). Quando o modelo diz 65%, acontece ~65%. Calibracao boa nao garante
+lucro — mas torna o 'value' confiavel e evita apostar em ilusao.
 
 ```bash
 # palpites do dia (rode SEMPRE com --liga; ex.: 99 = Brasileirao Serie A)

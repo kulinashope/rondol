@@ -180,6 +180,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--min-odd", type=float, default=1.3)
     p.add_argument("--max-odd", type=float, default=4.0)
     p.add_argument("--desfalques", action="store_true", help="Ajusta ataque por lesionados (so com --liga)")
+    p.add_argument("--h2h", action="store_true", help="Ajusta Over/BTTS pelos confrontos diretos (so com --liga)")
     p.add_argument("--perfil", action="store_true", help="So aposta a favor da tendencia da liga")
     p.add_argument("--top", type=int, default=5, help="Quantas apostas mostrar (padrao: 5)")
     p.add_argument("--salvar")
@@ -188,12 +189,13 @@ def parse_args() -> argparse.Namespace:
 
 def gerar_picks(client, liga, data, treino_dias=150, min_prob=55.0, min_edge=0.0,
                 min_odd=1.3, max_odd=4.0, perfil=False, desfalques=False, log=None,
-                incluir_finalizados=False):
+                incluir_finalizados=False, usar_h2h=False):
     """Gera os picks do dia (lista de dicts, ja ranqueada). Reutilizavel (CLI/Discord).
 
     Retorna (alvo_date, candidatos). Lanca ApiFootballError em erro de API.
     incluir_finalizados=True: usado no backtest (considera jogos ja jogados do dia;
     o treino continua so com dados ANTERIORES ao dia, entao segue out-of-sample).
+    usar_h2h=True (so com --liga): ajusta Over/BTTS pelos confrontos diretos recentes.
     """
     def _log(msg):
         if log:
@@ -248,6 +250,27 @@ def gerar_picks(client, liga, data, treino_dias=150, min_prob=55.0, min_edge=0.0
         pred = prever(forcas, mc, mf, ev.get("match_hometeam_name"), ev.get("match_awayteam_name"))
         if not pred:
             continue
+        # ajuste por H2H (confrontos diretos recentes) - so liga unica, peso leve
+        if usar_h2h and liga:
+            try:
+                h = client.get_h2h(ev.get("match_hometeam_name"), ev.get("match_awayteam_name"))
+                diretos = (h.get("firstTeam_VS_secondTeam", []) if isinstance(h, dict) else [])[:5]
+                ov = bt = nn = 0
+                for m in diretos:
+                    g1 = _to_int_score(m.get("match_hometeam_score"))
+                    g2 = _to_int_score(m.get("match_awayteam_score"))
+                    if g1 is None or g2 is None:
+                        continue
+                    nn += 1
+                    ov += 1 if (g1 + g2) > 2 else 0
+                    bt += 1 if (g1 > 0 and g2 > 0) else 0
+                if nn >= 3:  # so confia em H2H com amostra minima
+                    pred["OVER25"] = 0.85 * pred["OVER25"] + 0.15 * (ov / nn * 100)
+                    pred["UNDER25"] = 100 - pred["OVER25"]
+                    pred["BTS_YES"] = 0.85 * pred["BTS_YES"] + 0.15 * (bt / nn * 100)
+                    pred["BTS_NO"] = 100 - pred["BTS_YES"]
+            except Exception:
+                pass
         perfil_liga = perfis.get(lid)
         calib = calibs.get(lid, {})
         melhor_do_jogo = None
@@ -312,7 +335,7 @@ def main() -> None:
             alvo, candidatos = gerar_picks(
                 client, args.liga, args.data, args.treino_dias, args.min_prob,
                 args.min_edge, args.min_odd, args.max_odd, args.perfil, args.desfalques,
-                log=lambda m: console.print(f"[dim]{m}[/dim]"),
+                log=lambda m: console.print(f"[dim]{m}[/dim]"), usar_h2h=args.h2h,
             )
     except ApiFootballError as exc:
         console.print(f"[red]{exc}[/red]")

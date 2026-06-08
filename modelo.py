@@ -66,17 +66,32 @@ class Forca:
     btts_rate: float = 0.5   # fracao (ponderada) de jogos do time com BTTS
 
 
+def _stat_evento(j: dict, tipo: str):
+    """Extrai (home, away) de um tipo de estatistica do jogo (ex.: 'On Target')."""
+    for s in (j.get("statistics") or []):
+        if str(s.get("type", "")).strip().lower() == tipo.lower():
+            try:
+                return int(s.get("home")), int(s.get("away"))
+            except (TypeError, ValueError):
+                return None
+    return None
+
+
 def construir_forcas(jogos: list[dict], half_life_dias: float = 40.0) -> tuple[dict[str, Forca], float, float]:
     """Estima forcas dos times e medias da liga, com PESO POR RECENCIA.
 
     Jogos recentes pesam mais (forma atual): o peso cai pela metade a cada
     `half_life_dias`. Exclui jogos decididos em prorrogacao/penaltis (placar nao
     e de 90 min). Encolhe p/ a media quando ha poucos dados.
+
+    Alem dos gols, usa FINALIZACOES NO GOL ('On Target') quando disponiveis: o
+    rating de ataque/defesa e uma mistura gols (60%) + chutes no gol (40%), pois
+    chutes sao mais estaveis e preditivos (achado academico p/ Over/Under).
     """
     import datetime
 
     STATUS_NAO_REGULAMENTAR = {"after et", "after pen.", "aet"}
-    registros = []  # (date, home, away, gh, ga)
+    registros = []  # (date, home, away, gh, ga, oth, ota)
     for j in jogos:
         if not _is_finished(j):
             continue
@@ -92,7 +107,8 @@ def construir_forcas(jogos: list[dict], half_life_dias: float = 40.0) -> tuple[d
             d = datetime.date.fromisoformat(str(j.get("match_date", ""))[:10])
         except ValueError:
             d = None
-        registros.append((d, h, a, gh, ga))
+        ot = _stat_evento(j, "On Target")  # (chutes no gol casa, fora) ou None
+        registros.append((d, h, a, gh, ga, ot))
 
     if not registros:
         return {}, 0.0, 0.0
@@ -107,12 +123,13 @@ def construir_forcas(jogos: list[dict], half_life_dias: float = 40.0) -> tuple[d
 
     sw = swh = swa = 0.0
     sw_over = sw_btts = 0.0
-    gols_casa = defaultdict(list)   # lista de (peso, gols)
-    sofr_casa = defaultdict(list)
-    gols_fora = defaultdict(list)
-    sofr_fora = defaultdict(list)
-    eventos_time = defaultdict(list)  # time -> [(peso, over_flag, btts_flag)]
-    for (d, h, a, gh, ga) in registros:
+    sw_ot = swh_ot = swa_ot = 0.0  # medias de chutes no gol da liga
+    gols_casa = defaultdict(list); sofr_casa = defaultdict(list)
+    gols_fora = defaultdict(list); sofr_fora = defaultdict(list)
+    ot_casa = defaultdict(list); ots_casa = defaultdict(list)   # chutes feitos/sofridos em casa
+    ot_fora = defaultdict(list); ots_fora = defaultdict(list)   # chutes feitos/sofridos fora
+    eventos_time = defaultdict(list)
+    for (d, h, a, gh, ga, ot) in registros:
         w = peso(d)
         sw += w; swh += w * gh; swa += w * ga
         over_flag = 1 if (gh + ga) > 2 else 0
@@ -122,14 +139,21 @@ def construir_forcas(jogos: list[dict], half_life_dias: float = 40.0) -> tuple[d
         gols_fora[a].append((w, ga)); sofr_fora[a].append((w, gh))
         eventos_time[h].append((w, over_flag, btts_flag))
         eventos_time[a].append((w, over_flag, btts_flag))
+        if ot is not None:
+            oth, ota = ot
+            sw_ot += w; swh_ot += w * oth; swa_ot += w * ota
+            ot_casa[h].append((w, oth)); ots_casa[h].append((w, ota))
+            ot_fora[a].append((w, ota)); ots_fora[a].append((w, oth))
 
     if sw == 0:
         return {}, 0.0, 0.0
     media_casa = swh / sw
     media_fora = swa / sw
-    liga_over = sw_over / sw   # taxa media de Over 2.5 da liga (0-1)
-    liga_btts = sw_btts / sw   # taxa media de BTTS da liga (0-1)
-    k = 4.0  # encolhimento (em unidades de peso)
+    liga_over = sw_over / sw
+    liga_btts = sw_btts / sw
+    media_ot_casa = (swh_ot / sw_ot) if sw_ot > 0 else 0.0
+    media_ot_fora = (swa_ot / sw_ot) if sw_ot > 0 else 0.0
+    k = 4.0
 
     def razao(vals, media) -> float:
         if not vals or media <= 0:
@@ -138,11 +162,9 @@ def construir_forcas(jogos: list[dict], half_life_dias: float = 40.0) -> tuple[d
         if pt <= 0:
             return 1.0
         media_pond = sum(w * g for w, g in vals) / pt
-        r = media_pond / media
-        return (pt * r + k * 1.0) / (pt + k)
+        return (pt * (media_pond / media) + k * 1.0) / (pt + k)
 
     def taxa(vals, media_liga) -> float:
-        # fracao ponderada, encolhida p/ a media da liga
         if not vals:
             return media_liga
         pt = sum(w for w, *_ in vals)
@@ -150,16 +172,22 @@ def construir_forcas(jogos: list[dict], half_life_dias: float = 40.0) -> tuple[d
             return media_liga
         return (sum(w * fl for w, fl in vals) + k * media_liga) / (pt + k)
 
+    def blend(rating_gols, vals_ot, media_ot):
+        # mistura 60% gols + 40% chutes no gol, se houver dados de chutes
+        if media_ot <= 0 or sum(1 for _ in vals_ot) < 3:
+            return rating_gols
+        return 0.6 * rating_gols + 0.4 * razao(vals_ot, media_ot)
+
     times = set(gols_casa) | set(gols_fora) | set(sofr_casa) | set(sofr_fora)
     forcas: dict[str, Forca] = {}
     for t in times:
         f = Forca()
         f.jogos_casa = len(gols_casa.get(t, []))
         f.jogos_fora = len(gols_fora.get(t, []))
-        f.att_casa = razao(gols_casa.get(t, []), media_casa)
-        f.def_casa = razao(sofr_casa.get(t, []), media_fora)
-        f.att_fora = razao(gols_fora.get(t, []), media_fora)
-        f.def_fora = razao(sofr_fora.get(t, []), media_casa)
+        f.att_casa = blend(razao(gols_casa.get(t, []), media_casa), ot_casa.get(t, []), media_ot_casa)
+        f.def_casa = blend(razao(sofr_casa.get(t, []), media_fora), ots_casa.get(t, []), media_ot_fora)
+        f.att_fora = blend(razao(gols_fora.get(t, []), media_fora), ot_fora.get(t, []), media_ot_fora)
+        f.def_fora = blend(razao(sofr_fora.get(t, []), media_casa), ots_fora.get(t, []), media_ot_casa)
         evs = eventos_time.get(t, [])
         f.over_rate = taxa([(w, o) for (w, o, _b) in evs], liga_over)
         f.btts_rate = taxa([(w, b) for (w, _o, b) in evs], liga_btts)
