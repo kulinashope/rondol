@@ -93,6 +93,14 @@ def main() -> None:
 
     msg = montar_mensagem(alvo, candidatos, args.top, args.so_alta)
     enviar(webhook, msg)
+    # registra os picks enviados para o loop de aprendizado
+    try:
+        from aprendizado import registrar_picks
+        enviados = [c for c in candidatos if (not args.so_alta or c["nota"] == "Alta")][:args.top]
+        n_reg = registrar_picks(alvo.isoformat(), enviados)
+        print(f"Registrados {n_reg} pick(s) no historico.")
+    except Exception as exc:
+        print(f"Aviso: nao registrou no historico: {exc}")
     print(f"Enviado ao Discord: {len([c for c in candidatos if not args.so_alta or c['nota']=='Alta'])} pick(s).")
 
 

@@ -41,6 +41,18 @@ PERFIL_MERCADO = {
     "HOME": "casa", "DRAW": None, "AWAY": None, "BTS_NO": None,
 }
 
+# ligas/competicoes pouco previsiveis: amistosos (times testam, placar aleatorio)
+# e categorias de base/juniores. O modelo de historico nao modela isso bem.
+LIGAS_NAO_CONFIAVEIS = (
+    "friendl", "amist", "u20", "u21", "u23", "u19", "u18", "u17",
+    "youth", "sub-20", "sub-21", "sub20", "sub21", "juvenil", "junior",
+)
+
+
+def liga_confiavel(nome: str) -> bool:
+    n = (nome or "").lower()
+    return not any(p in n for p in LIGAS_NAO_CONFIAVEIS)
+
 
 def calibrar_liga(jogos: list[dict]) -> dict:
     """Auto-calibracao: separa um teste interno e mede o vies do modelo por
@@ -85,11 +97,16 @@ def calibrar_liga(jogos: list[dict]) -> dict:
     return {mkt: {"bias": (soma_prev[mkt] / n - soma_real[mkt] / n) * 100, "n": n} for mkt in ODD_KEY}
 
 
-def nota_confianca(bias: float | None, n: int) -> str:
+def nota_confianca(bias: float | None, n: int, mercado: str | None = None) -> str:
     if bias is None:
         return "sem dados"
     ab = abs(bias)
-    if n >= 40 and ab <= 4:
+    # mercados onde o modelo e historicamente mais fraco (Under/BTTS): exige
+    # vies menor e amostra maior para dar nota Alta.
+    fraco = mercado in ("UNDER25", "OVER25", "BTS_YES", "BTS_NO")
+    lim_alta = 3.0 if fraco else 4.0
+    n_alta = 60 if fraco else 40
+    if n >= n_alta and ab <= lim_alta:
         return "Alta"
     if n >= 20 and ab <= 8:
         return "Media"
@@ -170,10 +187,13 @@ def parse_args() -> argparse.Namespace:
 
 
 def gerar_picks(client, liga, data, treino_dias=150, min_prob=55.0, min_edge=0.0,
-                min_odd=1.3, max_odd=4.0, perfil=False, desfalques=False, log=None):
+                min_odd=1.3, max_odd=4.0, perfil=False, desfalques=False, log=None,
+                incluir_finalizados=False):
     """Gera os picks do dia (lista de dicts, ja ranqueada). Reutilizavel (CLI/Discord).
 
     Retorna (alvo_date, candidatos). Lanca ApiFootballError em erro de API.
+    incluir_finalizados=True: usado no backtest (considera jogos ja jogados do dia;
+    o treino continua so com dados ANTERIORES ao dia, entao segue out-of-sample).
     """
     def _log(msg):
         if log:
@@ -191,6 +211,13 @@ def gerar_picks(client, liga, data, treino_dias=150, min_prob=55.0, min_edge=0.0
     if not modelos:
         return alvo, []
 
+    # o que o sistema APRENDEU ao vivo (mercados/ligas a evitar por ROI real ruim)
+    try:
+        from aprendizado import carregar_ajustes
+        aprendido = carregar_ajustes()
+    except Exception:
+        aprendido = {"evitar_mercado": set(), "evitar_liga_mercado": set()}
+
     if desfalques and liga and liga in modelos:
         try:
             from desfalques import multiplicadores_ataque
@@ -207,8 +234,10 @@ def gerar_picks(client, liga, data, treino_dias=150, min_prob=55.0, min_edge=0.0
     odds_idx = indexar_odds(odds)
     candidatos = []
     for ev in fixtures:
-        if _is_finished(ev):
+        if _is_finished(ev) and not incluir_finalizados:
             continue
+        if not liga_confiavel(ev.get("league_name", "")):
+            continue  # pula amistosos e categorias de base
         lid = str(ev.get("league_id", ""))
         if lid not in modelos:
             continue
@@ -228,7 +257,12 @@ def gerar_picks(client, liga, data, treino_dias=150, min_prob=55.0, min_edge=0.0
             bias = info["bias"] if info else None
             nb = info["n"] if info else 0
             prob_cal = prob if bias is None else min(99.0, max(1.0, prob - bias))
-            nota = nota_confianca(bias, nb)
+            nota = nota_confianca(bias, nb, mercado)
+            # aprendizado ao vivo: rebaixa mercado/liga que vem dando prejuizo real
+            liga_nome = ev.get("league_name", "")
+            if mercado in aprendido.get("evitar_mercado", set()) or \
+               f"{liga_nome}|{mercado}" in aprendido.get("evitar_liga_mercado", set()):
+                nota = "Baixa"
             if prob_cal < min_prob:
                 continue
             if perfil_liga and perfil_liga.get("suspeito_1x2") and mercado in ("HOME", "DRAW", "AWAY"):
@@ -242,6 +276,8 @@ def gerar_picks(client, liga, data, treino_dias=150, min_prob=55.0, min_edge=0.0
             if value < min_edge:
                 continue
             item = {
+                "match_id": str(ev.get("match_id", "")),
+                "codigo": mercado,
                 "jogo": f"{ev.get('match_hometeam_name')} x {ev.get('match_awayteam_name')}",
                 "hora": ev.get("match_time", ""), "liga": ev.get("league_name", ""),
                 "aposta": MERC_LABEL[mercado], "nossa_prob": round(prob_cal, 1),

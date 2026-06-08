@@ -10,6 +10,7 @@ A API costuma responder:
 from __future__ import annotations
 
 import json
+import time
 from datetime import date, timedelta
 from typing import Any, Iterator
 
@@ -56,18 +57,23 @@ class ApiFootballClient:
             "APIkey": self._settings.api_key,
             **{k: v for k, v in params.items() if v is not None},
         }
-        try:
-            resp = self._session.get(BASE_URL, params=query, timeout=self._timeout)
-            resp.raise_for_status()
-        except requests.RequestException as exc:
-            raise ApiFootballError(f"Falha de conexao com a API: {exc}") from exc
-
-        try:
-            data = resp.json()
-        except json.JSONDecodeError as exc:
-            raise ApiFootballError(
-                f"Resposta nao e JSON valido: {resp.text[:200]}"
-            ) from exc
+        ultima_exc = None
+        for tentativa in range(3):  # ate 3 tentativas (rede instavel/IncompleteRead)
+            try:
+                resp = self._session.get(BASE_URL, params=query, timeout=self._timeout)
+                resp.raise_for_status()
+                data = resp.json()
+                break
+            except json.JSONDecodeError as exc:
+                raise ApiFootballError(
+                    f"Resposta nao e JSON valido: {resp.text[:200]}"
+                ) from exc
+            except requests.RequestException as exc:
+                ultima_exc = exc
+                if tentativa < 2:
+                    time.sleep(1.5 * (tentativa + 1))
+                    continue
+                raise ApiFootballError(f"Falha de conexao com a API: {exc}") from exc
 
         # Erro logico da API costuma vir como dict com a chave "error"
         if isinstance(data, dict) and "error" in data:

@@ -13,6 +13,9 @@ on:
         required: false
         default: ""
 
+permissions:
+  contents: write   # necessario para salvar o historico de aprendizado de volta no repo
+
 jobs:
   enviar-picks:
     runs-on: ubuntu-latest
@@ -28,7 +31,13 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
-      - name: Enviar picks ao Discord
+      - name: Conferir resultados anteriores e APRENDER
+        env:
+          APIFOOTBALL_KEY: ${{ secrets.APIFOOTBALL_KEY }}
+          APIFOOTBALL_TIMEZONE: America/Sao_Paulo
+        run: python acompanhar.py || echo "sem historico ainda"
+
+      - name: Gerar e enviar picks do dia (ja com o aprendizado)
         env:
           APIFOOTBALL_KEY: ${{ secrets.APIFOOTBALL_KEY }}
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
@@ -39,4 +48,16 @@ jobs:
             python enviar_discord.py --liga "$LIGA" --treino-dias 120 --min-edge 0.05 --so-alta --top 8
           else
             python enviar_discord.py --treino-dias 90 --min-edge 0.05 --so-alta --top 8
+          fi
+
+      - name: Salvar historico de aprendizado de volta no repo
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add historico_picks.json ajustes_mercado.json 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Atualiza historico e aprendizado [skip ci]"
+            git push
+          else
+            echo "Nada novo para salvar."
           fi
