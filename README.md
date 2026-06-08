@@ -490,6 +490,8 @@ apostas/
   desfalques.py    # CLI ajuste por lesionados (gols fora) que alimenta o modelo
   pick_do_dia.py   # CLI FINAL: junta modelo + desfalques + perfil + value num comando
   enviar_discord.py # envia os picks do dia para o Discord (webhook)
+  dobradinha.py    # combinada de 2 jogos por dia (par mais provavel ~odd 2.0)
+  alertas_ao_vivo.py # alerta no Discord quando sai gol nos jogos dos picks
   aprendizado.py   # loop de aprendizado: registra picks, confere e aprende por mercado/liga
   acompanhar.py    # confere resultados + aprende + resumo (posta no Discord com --discord)
   conferir_picks.py # backtest dos NOSSOS picks (out-of-sample) vs resultado real

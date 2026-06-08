@@ -1,0 +1,32 @@
+name: Alertas de gol ao vivo
+
+# Monitora o livescore e alerta no Discord quando sai gol nos jogos dos picks.
+# ATENCAO: roda por horas. E GRATIS em repositorio PUBLICO (Actions ilimitado).
+# Em repo privado consome muito dos 2000 min/mes — nesse caso, rode localmente:
+#   python alertas_ao_vivo.py --horas 6
+on:
+  schedule:
+    - cron: "0 13 * * *"   # 13:00 UTC ~ 10:00 BRT (apos os picks das 09:00)
+  workflow_dispatch:
+    inputs:
+      horas:
+        description: "Horas de monitoramento"
+        required: false
+        default: "6"
+
+jobs:
+  aovivo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - name: Monitorar gols ao vivo
+        env:
+          APIFOOTBALL_KEY: ${{ secrets.APIFOOTBALL_KEY }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          APIFOOTBALL_TIMEZONE: America/Sao_Paulo
+        run: python alertas_ao_vivo.py --horas "${{ github.event.inputs.horas || '6' }}" --intervalo 60
