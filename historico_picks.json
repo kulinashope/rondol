@@ -54,5 +54,31 @@
     "status": "green",
     "lucro_unit": 0.5700000000000001,
     "placar": "4-1"
+  },
+  {
+    "data": "2026-06-09",
+    "match_id": "766301",
+    "jogo": "Almeria x Castellon",
+    "liga": "Segunda División - Semi-finals",
+    "codigo": "BTS_YES",
+    "aposta": "Ambas marcam: Sim",
+    "odd": 1.57,
+    "nota": "Media",
+    "prob": 68.8,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-09",
+    "match_id": "767736",
+    "jogo": "US Bougouni x USFAS Bamako",
+    "liga": "Première Division",
+    "codigo": "BTS_NO",
+    "aposta": "Ambas marcam: Nao",
+    "odd": 1.46,
+    "nota": "Baixa",
+    "prob": 70.0,
+    "status": "pendente",
+    "lucro_unit": null
   }
 ]
