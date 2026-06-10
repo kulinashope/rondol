@@ -82,5 +82,31 @@
     "status": "red",
     "lucro_unit": -1.0,
     "placar": "2-1"
+  },
+  {
+    "data": "2026-06-10",
+    "match_id": "745015",
+    "jogo": "Wynnum Wolves x Eastern Suburbs",
+    "liga": "Queensland NPL",
+    "codigo": "OVER25",
+    "aposta": "Over 2.5",
+    "odd": 1.42,
+    "nota": "Baixa",
+    "prob": 88.4,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-10",
+    "match_id": "766531",
+    "jogo": "Afturelding x Stjarnan",
+    "liga": "Cup - Quarter-finals",
+    "codigo": "OVER25",
+    "aposta": "Over 2.5",
+    "odd": 1.33,
+    "nota": "sem dados",
+    "prob": 89.3,
+    "status": "pendente",
+    "lucro_unit": null
   }
 ]
