@@ -7,15 +7,15 @@
       "evitar": false
     },
     "BTS_NO": {
-      "n": 1,
+      "n": 2,
       "acerto_pct": 0.0,
       "roi_pct": -100.0,
       "evitar": false
     },
     "BTS_YES": {
-      "n": 1,
-      "acerto_pct": 0.0,
-      "roi_pct": -100.0,
+      "n": 2,
+      "acerto_pct": 50.0,
+      "roi_pct": -21.5,
       "evitar": false
     }
   },
@@ -43,12 +43,24 @@
       "acerto_pct": 100.0,
       "roi_pct": 57.0,
       "evitar": false
+    },
+    "Segunda División - Semi-finals|BTS_YES": {
+      "n": 1,
+      "acerto_pct": 100.0,
+      "roi_pct": 57.0,
+      "evitar": false
+    },
+    "Première Division|BTS_NO": {
+      "n": 1,
+      "acerto_pct": 0.0,
+      "roi_pct": -100.0,
+      "evitar": false
     }
   },
   "total": {
-    "n": 4,
-    "acerto_pct": 25.0,
-    "roi_pct": -60.7,
+    "n": 6,
+    "acerto_pct": 33.3,
+    "roi_pct": -47.7,
     "evitar": false
   }
 }

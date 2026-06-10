@@ -65,8 +65,9 @@
     "odd": 1.57,
     "nota": "Media",
     "prob": 68.8,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "green",
+    "lucro_unit": 0.5700000000000001,
+    "placar": "3-2"
   },
   {
     "data": "2026-06-09",
@@ -78,7 +79,8 @@
     "odd": 1.46,
     "nota": "Baixa",
     "prob": 70.0,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "red",
+    "lucro_unit": -1.0,
+    "placar": "2-1"
   }
 ]
