@@ -106,7 +106,8 @@
     "odd": 1.33,
     "nota": "sem dados",
     "prob": 89.3,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "green",
+    "lucro_unit": 0.33000000000000007,
+    "placar": "3-1"
   }
 ]

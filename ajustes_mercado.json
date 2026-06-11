@@ -1,9 +1,9 @@
 {
   "mercado": {
     "OVER25": {
-      "n": 2,
-      "acerto_pct": 50.0,
-      "roi_pct": -21.5,
+      "n": 3,
+      "acerto_pct": 66.7,
+      "roi_pct": -3.3,
       "evitar": false
     },
     "BTS_NO": {
@@ -55,12 +55,18 @@
       "acerto_pct": 0.0,
       "roi_pct": -100.0,
       "evitar": false
+    },
+    "Cup - Quarter-finals|OVER25": {
+      "n": 1,
+      "acerto_pct": 100.0,
+      "roi_pct": 33.0,
+      "evitar": false
     }
   },
   "total": {
-    "n": 6,
-    "acerto_pct": 33.3,
-    "roi_pct": -47.7,
+    "n": 7,
+    "acerto_pct": 42.9,
+    "roi_pct": -36.1,
     "evitar": false
   }
 }
