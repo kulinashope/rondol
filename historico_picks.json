@@ -109,5 +109,57 @@
     "status": "green",
     "lucro_unit": 0.33000000000000007,
     "placar": "3-1"
+  },
+  {
+    "data": "2026-06-12",
+    "match_id": "731337",
+    "jogo": "Stenungsunds x Ahlafors IF",
+    "liga": "Division 2 - Norra Götaland",
+    "codigo": "HOME",
+    "aposta": "Casa (1)",
+    "odd": 2.8,
+    "nota": "Alta",
+    "prob": 59.8,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-12",
+    "match_id": "731701",
+    "jogo": "Osterlen x Nosaby",
+    "liga": "Division 2 - Södra Götaland",
+    "codigo": "HOME",
+    "aposta": "Casa (1)",
+    "odd": 2.28,
+    "nota": "Alta",
+    "prob": 57.1,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-12",
+    "match_id": "714249",
+    "jogo": "Treaty United x Bray",
+    "liga": "First Division",
+    "codigo": "OVER25",
+    "aposta": "Over 2.5",
+    "odd": 1.72,
+    "nota": "Baixa",
+    "prob": 90.0,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-12",
+    "match_id": "734953",
+    "jogo": "Throttur x Kopavogur",
+    "liga": "1. Deild",
+    "codigo": "OVER25",
+    "aposta": "Over 2.5",
+    "odd": 1.43,
+    "nota": "Baixa",
+    "prob": 99.0,
+    "status": "pendente",
+    "lucro_unit": null
   }
 ]
