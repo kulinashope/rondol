@@ -165,5 +165,83 @@
     "status": "red",
     "lucro_unit": -1.0,
     "placar": "2-0"
+  },
+  {
+    "data": "2026-06-13",
+    "match_id": "757398",
+    "jogo": "AE Altos x Atletico-CE",
+    "liga": "Serie D",
+    "codigo": "UNDER25",
+    "aposta": "Under 2.5",
+    "odd": 2.0,
+    "nota": "Alta",
+    "prob": 66.1,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-13",
+    "match_id": "768383",
+    "jogo": "Leioa x Albacete B",
+    "liga": "Tercera División RFEF - Promotion Play Offs",
+    "codigo": "BTS_NO",
+    "aposta": "Ambas marcam: Nao",
+    "odd": 1.88,
+    "nota": "Alta",
+    "prob": 64.3,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-13",
+    "match_id": "768384",
+    "jogo": "Tropezon x Arnedo",
+    "liga": "Tercera División RFEF - Promotion Play Offs",
+    "codigo": "BTS_NO",
+    "aposta": "Ambas marcam: Nao",
+    "odd": 1.88,
+    "nota": "Alta",
+    "prob": 63.5,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-13",
+    "match_id": "757409",
+    "jogo": "Ferroviario x Fluminense-PI",
+    "liga": "Serie D",
+    "codigo": "UNDER25",
+    "aposta": "Under 2.5",
+    "odd": 1.67,
+    "nota": "Alta",
+    "prob": 65.0,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-13",
+    "match_id": "749771",
+    "jogo": "Sportivo Las Parejas x Chivilcoy",
+    "liga": "Torneo Federal A",
+    "codigo": "BTS_NO",
+    "aposta": "Ambas marcam: Nao",
+    "odd": 1.53,
+    "nota": "Baixa",
+    "prob": 99.0,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-13",
+    "match_id": "719565",
+    "jogo": "Def. de Belgrano x Colon Santa Fe",
+    "liga": "Primera Nacional",
+    "codigo": "UNDER25",
+    "aposta": "Under 2.5",
+    "odd": 1.38,
+    "nota": "Baixa",
+    "prob": 91.6,
+    "status": "pendente",
+    "lucro_unit": null
   }
 ]
