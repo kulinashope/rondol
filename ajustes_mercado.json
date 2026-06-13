@@ -1,9 +1,9 @@
 {
   "mercado": {
     "OVER25": {
-      "n": 3,
-      "acerto_pct": 66.7,
-      "roi_pct": -3.3,
+      "n": 5,
+      "acerto_pct": 60.0,
+      "roi_pct": -7.6,
       "evitar": false
     },
     "BTS_NO": {
@@ -16,6 +16,12 @@
       "n": 2,
       "acerto_pct": 50.0,
       "roi_pct": -21.5,
+      "evitar": false
+    },
+    "HOME": {
+      "n": 2,
+      "acerto_pct": 50.0,
+      "roi_pct": 14.0,
       "evitar": false
     }
   },
@@ -61,12 +67,36 @@
       "acerto_pct": 100.0,
       "roi_pct": 33.0,
       "evitar": false
+    },
+    "Division 2 - Norra Götaland|HOME": {
+      "n": 1,
+      "acerto_pct": 0.0,
+      "roi_pct": -100.0,
+      "evitar": false
+    },
+    "Division 2 - Södra Götaland|HOME": {
+      "n": 1,
+      "acerto_pct": 100.0,
+      "roi_pct": 128.0,
+      "evitar": false
+    },
+    "First Division|OVER25": {
+      "n": 1,
+      "acerto_pct": 100.0,
+      "roi_pct": 72.0,
+      "evitar": false
+    },
+    "1. Deild|OVER25": {
+      "n": 1,
+      "acerto_pct": 0.0,
+      "roi_pct": -100.0,
+      "evitar": false
     }
   },
   "total": {
-    "n": 7,
-    "acerto_pct": 42.9,
-    "roi_pct": -36.1,
+    "n": 11,
+    "acerto_pct": 45.5,
+    "roi_pct": -23.0,
     "evitar": false
   }
 }
