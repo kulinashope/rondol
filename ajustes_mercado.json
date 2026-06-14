@@ -7,9 +7,9 @@
       "evitar": false
     },
     "BTS_NO": {
-      "n": 2,
-      "acerto_pct": 0.0,
-      "roi_pct": -100.0,
+      "n": 5,
+      "acerto_pct": 60.0,
+      "roi_pct": 5.8,
       "evitar": false
     },
     "BTS_YES": {
@@ -22,6 +22,12 @@
       "n": 2,
       "acerto_pct": 50.0,
       "roi_pct": 14.0,
+      "evitar": false
+    },
+    "UNDER25": {
+      "n": 3,
+      "acerto_pct": 33.3,
+      "roi_pct": -44.3,
       "evitar": false
     }
   },
@@ -91,12 +97,36 @@
       "acerto_pct": 0.0,
       "roi_pct": -100.0,
       "evitar": false
+    },
+    "Serie D|UNDER25": {
+      "n": 2,
+      "acerto_pct": 50.0,
+      "roi_pct": -16.5,
+      "evitar": false
+    },
+    "Tercera División RFEF - Promotion Play Offs|BTS_NO": {
+      "n": 2,
+      "acerto_pct": 100.0,
+      "roi_pct": 88.0,
+      "evitar": false
+    },
+    "Torneo Federal A|BTS_NO": {
+      "n": 1,
+      "acerto_pct": 100.0,
+      "roi_pct": 53.0,
+      "evitar": false
+    },
+    "Primera Nacional|UNDER25": {
+      "n": 1,
+      "acerto_pct": 0.0,
+      "roi_pct": -100.0,
+      "evitar": false
     }
   },
   "total": {
-    "n": 11,
-    "acerto_pct": 45.5,
-    "roi_pct": -23.0,
+    "n": 17,
+    "acerto_pct": 52.9,
+    "roi_pct": -9.2,
     "evitar": false
   }
 }
