@@ -260,8 +260,9 @@
     "odd": 2.35,
     "nota": "Alta",
     "prob": 61.0,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "green",
+    "lucro_unit": 1.35,
+    "placar": "3-0"
   },
   {
     "data": "2026-06-14",
@@ -273,8 +274,9 @@
     "odd": 2.13,
     "nota": "Alta",
     "prob": 65.7,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "red",
+    "lucro_unit": -1.0,
+    "placar": "2-1"
   },
   {
     "data": "2026-06-14",
@@ -286,8 +288,9 @@
     "odd": 2.3,
     "nota": "Alta",
     "prob": 56.9,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "red",
+    "lucro_unit": -1.0,
+    "placar": "2-0"
   },
   {
     "data": "2026-06-14",
@@ -299,8 +302,9 @@
     "odd": 1.85,
     "nota": "Alta",
     "prob": 65.9,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "red",
+    "lucro_unit": -1.0,
+    "placar": "3-1"
   },
   {
     "data": "2026-06-14",
@@ -312,8 +316,9 @@
     "odd": 1.85,
     "nota": "Alta",
     "prob": 64.1,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "green",
+    "lucro_unit": 0.8500000000000001,
+    "placar": "0-0"
   },
   {
     "data": "2026-06-14",
@@ -325,8 +330,9 @@
     "odd": 1.65,
     "nota": "Alta",
     "prob": 70.5,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "green",
+    "lucro_unit": 0.6499999999999999,
+    "placar": "1-0"
   },
   {
     "data": "2026-06-14",
@@ -338,8 +344,9 @@
     "odd": 1.83,
     "nota": "Alta",
     "prob": 63.1,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "green",
+    "lucro_unit": 0.8300000000000001,
+    "placar": "3-1"
   },
   {
     "data": "2026-06-14",
@@ -351,8 +358,9 @@
     "odd": 1.73,
     "nota": "Alta",
     "prob": 66.7,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "green",
+    "lucro_unit": 0.73,
+    "placar": "1-0"
   },
   {
     "data": "2026-06-14",
@@ -364,8 +372,9 @@
     "odd": 1.57,
     "nota": "Baixa",
     "prob": 99.0,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "green",
+    "lucro_unit": 0.5700000000000001,
+    "placar": "0-0"
   },
   {
     "data": "2026-06-14",
@@ -377,7 +386,8 @@
     "odd": 1.49,
     "nota": "Baixa",
     "prob": 99.0,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "red",
+    "lucro_unit": -1.0,
+    "placar": "2-2"
   }
 ]
