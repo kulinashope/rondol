@@ -389,5 +389,31 @@
     "status": "red",
     "lucro_unit": -1.0,
     "placar": "2-2"
+  },
+  {
+    "data": "2026-06-16",
+    "match_id": "745025",
+    "jogo": "Gold Coast Knights x Queensland Lions",
+    "liga": "Queensland NPL",
+    "codigo": "OVER25",
+    "aposta": "Over 2.5",
+    "odd": 1.41,
+    "nota": "Baixa",
+    "prob": 87.2,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-16",
+    "match_id": "729624",
+    "jogo": "Stjarnan x Breidablik",
+    "liga": "Besta deild",
+    "codigo": "OVER25",
+    "aposta": "Over 2.5",
+    "odd": 1.25,
+    "nota": "Baixa",
+    "prob": 81.3,
+    "status": "pendente",
+    "lucro_unit": null
   }
 ]
