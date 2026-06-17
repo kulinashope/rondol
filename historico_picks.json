@@ -413,7 +413,8 @@
     "odd": 1.25,
     "nota": "Baixa",
     "prob": 81.3,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "green",
+    "lucro_unit": 0.25,
+    "placar": "4-4"
   }
 ]
