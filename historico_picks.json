@@ -416,5 +416,83 @@
     "status": "green",
     "lucro_unit": 0.25,
     "placar": "4-4"
+  },
+  {
+    "data": "2026-06-17",
+    "match_id": "733263",
+    "jogo": "Talleres Cordoba 2 x Racing Club 2",
+    "liga": "Torneo Proyección",
+    "codigo": "OVER25",
+    "aposta": "Over 2.5",
+    "odd": 1.97,
+    "nota": "Alta",
+    "prob": 61.0,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-17",
+    "match_id": "733255",
+    "jogo": "Gimnasia Mendoza 2 x Argentinos Jrs 2",
+    "liga": "Torneo Proyección",
+    "codigo": "BTS_NO",
+    "aposta": "Ambas marcam: Nao",
+    "odd": 2.05,
+    "nota": "Alta",
+    "prob": 57.8,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-17",
+    "match_id": "719534",
+    "jogo": "Gimnasia Jujuy x Nueva Chicago",
+    "liga": "Primera Nacional",
+    "codigo": "UNDER25",
+    "aposta": "Under 2.5",
+    "odd": 1.68,
+    "nota": "Alta",
+    "prob": 64.2,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-17",
+    "match_id": "733259",
+    "jogo": "Instituto 2 x Union de Santa Fe 2",
+    "liga": "Torneo Proyección",
+    "codigo": "BTS_NO",
+    "aposta": "Ambas marcam: Nao",
+    "odd": 1.91,
+    "nota": "Alta",
+    "prob": 55.2,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-17",
+    "match_id": "767319",
+    "jogo": "Belgrano Zarate x Buenos Aires City",
+    "liga": "Torneo Promocional Amateur",
+    "codigo": "UNDER25",
+    "aposta": "Under 2.5",
+    "odd": 1.5,
+    "nota": "sem dados",
+    "prob": 83.6,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-17",
+    "match_id": "763828",
+    "jogo": "GA Farroupilha x GE Bage",
+    "liga": "Copa Gaúcha",
+    "codigo": "UNDER25",
+    "aposta": "Under 2.5",
+    "odd": 1.45,
+    "nota": "sem dados",
+    "prob": 74.7,
+    "status": "pendente",
+    "lucro_unit": null
   }
 ]
