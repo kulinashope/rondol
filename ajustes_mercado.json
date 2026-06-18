@@ -1,15 +1,15 @@
 {
   "mercado": {
     "OVER25": {
-      "n": 8,
-      "acerto_pct": 62.5,
-      "roi_pct": 2.8,
+      "n": 9,
+      "acerto_pct": 66.7,
+      "roi_pct": 13.2,
       "evitar": false
     },
     "BTS_NO": {
-      "n": 6,
+      "n": 8,
       "acerto_pct": 50.0,
-      "roi_pct": -11.8,
+      "roi_pct": -10.0,
       "evitar": false
     },
     "BTS_YES": {
@@ -25,23 +25,23 @@
       "evitar": false
     },
     "UNDER25": {
-      "n": 9,
-      "acerto_pct": 55.6,
-      "roi_pct": -5.9,
+      "n": 12,
+      "acerto_pct": 50.0,
+      "roi_pct": -16.9,
       "evitar": false
     }
   },
   "liga_mercado": {
     "Torneo Proyección|OVER25": {
-      "n": 1,
-      "acerto_pct": 0.0,
-      "roi_pct": -100.0,
+      "n": 2,
+      "acerto_pct": 50.0,
+      "roi_pct": -1.5,
       "evitar": false
     },
     "Torneo Proyección|BTS_NO": {
-      "n": 1,
-      "acerto_pct": 0.0,
-      "roi_pct": -100.0,
+      "n": 3,
+      "acerto_pct": 33.3,
+      "roi_pct": -36.3,
       "evitar": false
     },
     "Division 2 - Norrland|BTS_YES": {
@@ -117,7 +117,7 @@
       "evitar": false
     },
     "Primera Nacional|UNDER25": {
-      "n": 1,
+      "n": 2,
       "acerto_pct": 0.0,
       "roi_pct": -100.0,
       "evitar": false
@@ -145,12 +145,24 @@
       "acerto_pct": 100.0,
       "roi_pct": 25.0,
       "evitar": false
+    },
+    "Torneo Promocional Amateur|UNDER25": {
+      "n": 1,
+      "acerto_pct": 100.0,
+      "roi_pct": 50.0,
+      "evitar": false
+    },
+    "Copa Gaúcha|UNDER25": {
+      "n": 1,
+      "acerto_pct": 0.0,
+      "roi_pct": -100.0,
+      "evitar": false
     }
   },
   "total": {
-    "n": 28,
-    "acerto_pct": 57.1,
-    "roi_pct": -1.2,
+    "n": 34,
+    "acerto_pct": 55.9,
+    "roi_pct": -2.8,
     "evitar": false
   }
 }
