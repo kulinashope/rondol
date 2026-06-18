@@ -500,5 +500,44 @@
     "status": "red",
     "lucro_unit": -1.0,
     "placar": "1-2"
+  },
+  {
+    "data": "2026-06-18",
+    "match_id": "733251",
+    "jogo": "Boca Juniors 2 x Lanus 2",
+    "liga": "Torneo Proyección",
+    "codigo": "OVER25",
+    "aposta": "Over 2.5",
+    "odd": 2.03,
+    "nota": "Alta",
+    "prob": 55.7,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-18",
+    "match_id": "736444",
+    "jogo": "Fransta x Friska Viljor",
+    "liga": "Division 2 - Norrland",
+    "codigo": "BTS_YES",
+    "aposta": "Ambas marcam: Sim",
+    "odd": 1.32,
+    "nota": "Alta",
+    "prob": 65.5,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-18",
+    "match_id": "741264",
+    "jogo": "Tammeka U21 x Tabasalu",
+    "liga": "Esiliiga B",
+    "codigo": "OVER25",
+    "aposta": "Over 2.5",
+    "odd": 1.2,
+    "nota": "Media",
+    "prob": 81.1,
+    "status": "pendente",
+    "lucro_unit": null
   }
 ]
