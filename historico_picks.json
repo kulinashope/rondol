@@ -511,8 +511,9 @@
     "odd": 2.03,
     "nota": "Alta",
     "prob": 55.7,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "red",
+    "lucro_unit": -1.0,
+    "placar": "0-1"
   },
   {
     "data": "2026-06-18",
@@ -524,8 +525,9 @@
     "odd": 1.32,
     "nota": "Alta",
     "prob": 65.5,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "green",
+    "lucro_unit": 0.32000000000000006,
+    "placar": "1-3"
   },
   {
     "data": "2026-06-18",
@@ -537,7 +539,8 @@
     "odd": 1.2,
     "nota": "Media",
     "prob": 81.1,
-    "status": "pendente",
-    "lucro_unit": null
+    "status": "green",
+    "lucro_unit": 0.19999999999999996,
+    "placar": "1-3"
   }
 ]

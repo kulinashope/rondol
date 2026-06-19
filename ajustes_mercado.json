@@ -1,9 +1,9 @@
 {
   "mercado": {
     "OVER25": {
-      "n": 9,
-      "acerto_pct": 66.7,
-      "roi_pct": 13.2,
+      "n": 11,
+      "acerto_pct": 63.6,
+      "roi_pct": 3.5,
       "evitar": false
     },
     "BTS_NO": {
@@ -13,9 +13,9 @@
       "evitar": false
     },
     "BTS_YES": {
-      "n": 3,
-      "acerto_pct": 66.7,
-      "roi_pct": 13.3,
+      "n": 4,
+      "acerto_pct": 75.0,
+      "roi_pct": 18.0,
       "evitar": false
     },
     "HOME": {
@@ -33,9 +33,9 @@
   },
   "liga_mercado": {
     "Torneo Proyección|OVER25": {
-      "n": 2,
-      "acerto_pct": 50.0,
-      "roi_pct": -1.5,
+      "n": 3,
+      "acerto_pct": 33.3,
+      "roi_pct": -34.3,
       "evitar": false
     },
     "Torneo Proyección|BTS_NO": {
@@ -45,9 +45,9 @@
       "evitar": false
     },
     "Division 2 - Norrland|BTS_YES": {
-      "n": 1,
-      "acerto_pct": 0.0,
-      "roi_pct": -100.0,
+      "n": 2,
+      "acerto_pct": 50.0,
+      "roi_pct": -34.0,
       "evitar": false
     },
     "Ettan - Norra|OVER25": {
@@ -157,12 +157,18 @@
       "acerto_pct": 0.0,
       "roi_pct": -100.0,
       "evitar": false
+    },
+    "Esiliiga B|OVER25": {
+      "n": 1,
+      "acerto_pct": 100.0,
+      "roi_pct": 20.0,
+      "evitar": false
     }
   },
   "total": {
-    "n": 34,
-    "acerto_pct": 55.9,
-    "roi_pct": -2.8,
+    "n": 37,
+    "acerto_pct": 56.8,
+    "roi_pct": -3.9,
     "evitar": false
   }
 }
