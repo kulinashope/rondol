@@ -542,5 +542,31 @@
     "status": "green",
     "lucro_unit": 0.19999999999999996,
     "placar": "1-3"
+  },
+  {
+    "data": "2026-06-19",
+    "match_id": "714255",
+    "jogo": "Cork City x Treaty United",
+    "liga": "First Division",
+    "codigo": "OVER25",
+    "aposta": "Over 2.5",
+    "odd": 1.55,
+    "nota": "Baixa",
+    "prob": 90.5,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-19",
+    "match_id": "734958",
+    "jogo": "Njardvik x Leiknir",
+    "liga": "1. Deild",
+    "codigo": "HOME",
+    "aposta": "Casa (1)",
+    "odd": 1.52,
+    "nota": "Baixa",
+    "prob": 78.5,
+    "status": "pendente",
+    "lucro_unit": null
   }
 ]
