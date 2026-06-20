@@ -570,5 +570,57 @@
     "status": "green",
     "lucro_unit": 0.52,
     "placar": "1-0"
+  },
+  {
+    "data": "2026-06-20",
+    "match_id": "719322",
+    "jogo": "San Telmo x Racing Cordoba",
+    "liga": "Primera Nacional",
+    "codigo": "BTS_NO",
+    "aposta": "Ambas marcam: Nao",
+    "odd": 1.6,
+    "nota": "Alta",
+    "prob": 72.4,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-20",
+    "match_id": "719314",
+    "jogo": "Colegiales x Quilmes",
+    "liga": "Primera Nacional",
+    "codigo": "BTS_NO",
+    "aposta": "Ambas marcam: Nao",
+    "odd": 1.53,
+    "nota": "Alta",
+    "prob": 74.3,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-20",
+    "match_id": "752619",
+    "jogo": "Hwacheon W x Sejong Sportstoto W",
+    "liga": "WK-League",
+    "codigo": "OVER25",
+    "aposta": "Over 2.5",
+    "odd": 1.86,
+    "nota": "Baixa",
+    "prob": 99.0,
+    "status": "pendente",
+    "lucro_unit": null
+  },
+  {
+    "data": "2026-06-20",
+    "match_id": "757741",
+    "jogo": "Tuggeranong Utd x Canberra White Eagles",
+    "liga": "Capital Territory NPL",
+    "codigo": "OVER25",
+    "aposta": "Over 2.5",
+    "odd": 1.26,
+    "nota": "Baixa",
+    "prob": 99.0,
+    "status": "pendente",
+    "lucro_unit": null
   }
 ]
