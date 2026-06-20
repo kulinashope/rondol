@@ -1,9 +1,9 @@
 {
   "mercado": {
     "OVER25": {
-      "n": 11,
-      "acerto_pct": 63.6,
-      "roi_pct": 3.5,
+      "n": 12,
+      "acerto_pct": 66.7,
+      "roi_pct": 7.8,
       "evitar": false
     },
     "BTS_NO": {
@@ -19,9 +19,9 @@
       "evitar": false
     },
     "HOME": {
-      "n": 2,
-      "acerto_pct": 50.0,
-      "roi_pct": 14.0,
+      "n": 3,
+      "acerto_pct": 66.7,
+      "roi_pct": 26.7,
       "evitar": false
     },
     "UNDER25": {
@@ -87,9 +87,9 @@
       "evitar": false
     },
     "First Division|OVER25": {
-      "n": 1,
+      "n": 2,
       "acerto_pct": 100.0,
-      "roi_pct": 72.0,
+      "roi_pct": 63.5,
       "evitar": false
     },
     "1. Deild|OVER25": {
@@ -163,12 +163,18 @@
       "acerto_pct": 100.0,
       "roi_pct": 20.0,
       "evitar": false
+    },
+    "1. Deild|HOME": {
+      "n": 1,
+      "acerto_pct": 100.0,
+      "roi_pct": 52.0,
+      "evitar": false
     }
   },
   "total": {
-    "n": 37,
-    "acerto_pct": 56.8,
-    "roi_pct": -3.9,
+    "n": 39,
+    "acerto_pct": 59.0,
+    "roi_pct": -0.9,
     "evitar": false
   }
 }
